@@ -4,7 +4,7 @@ pipeline {
     registryCredential = 'docker-hub'
     kubeConfigCredentialsId = 'kubernetes-cred'
   }
-  agent { label 'linux' }
+  agent any
   stages {
     
     stage('Checkout Source') {
