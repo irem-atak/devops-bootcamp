@@ -1,22 +1,30 @@
-DevOps Bootcamp Task
-This repository contains the code and configurations for the DevOps Bootcamp project, demonstrating various DevOps practices and tools.
+# DevOps Bootcamp Task
 
-Steps
-Step 1: Version Control and Application Creation
-Initiated version control using Git to track changes in the codebase.
-Developed a simple web application using Flask for Python or a basic Node.js app.
-Step 2: Application Dockerization
-Containerized the application using Docker.
-Crafted a Dockerfile to define the runtime environment and dependencies.
-Step 3: Kubernetes Deployment
-Established a local Kubernetes cluster with Minikube.
-Prepared Kubernetes manifests (deployment.yaml and service.yaml) for deployment.
-Step 4: Setting Up Monitoring
-Integrated monitoring tools like Prometheus and Grafana into the Kubernetes cluster.
-Installed Prometheus using Helm and configured it to scrape metrics from application pods.
-Step 5: Visualization with Grafana
-Utilized Grafana to visualize metrics collected by Prometheus.
-Accessed Grafana's web interface and created custom dashboards.
+This repository contains the code and configurations for the DevOps Bootcamp task, demonstrating various DevOps practices and tools.
 
-Docker Repository: Contains Dockerfile for containerization. 
-https://hub.docker.com/r/irematk/devops-bootcamp
+## Steps
+
+### Step 1: Version Control and Application Creation
+- Initiated version control using Git to track changes in the codebase.
+- Developed a simple web application using Node.js app.
+
+### Step 2: Application Dockerization
+- Containerized the application using Docker.
+- Crafted a Dockerfile to define the runtime environment and dependencies.
+
+### Step 3: Kubernetes Deployment
+- Established a local Kubernetes cluster with Minikube.
+- Prepared Kubernetes manifests (`deployment.yaml` and `service.yaml`) for deployment.
+
+### Step 4: Setting Up Monitoring
+- Integrated monitoring tools like Prometheus and Grafana into the Kubernetes cluster.
+- Installed Prometheus using Helm and configured it to scrape metrics from application pods.
+
+### Step 5: Visualization with Grafana
+- Utilized Grafana to visualize metrics collected by Prometheus.
+- Accessed Grafana's web interface and created custom dashboards.
+https://github.com/irem-atak/devops-bootcamp/issues/1#issue-2345439854
+## Repositories
+- [Docker Repository](https://hub.docker.com/r/irematk/devops-bootcamp): Contains Dockerfile for containerization.
+
+
