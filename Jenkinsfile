@@ -1,17 +1,10 @@
 pipeline {
   environment {
     dockerimagename = "irematk/devops-bootcamp"
-    dockerImage = ""
+    registryCredential = 'docker-hub'
+    kubeConfigCredentialsId = 'kubernetes-cred'
   }
-  agent {
-
-    kubernetes {
-
-      label 'my-app-deployment-89d4845dc-cdn28'
-
-    }
-
-  }
+  agent any
   stages {
     stage('Checkout Source') {
       steps {
@@ -19,30 +12,29 @@ pipeline {
             url: 'https://github.com/irem-atak/devops-bootcamp.git'
       }
     }
-    stage('Build image') {
-      steps{
+    stage('Build Image') {
+      steps {
         script {
           dockerImage = docker.build dockerimagename
         }
       }
     }
-    stage('Pushing Image') {
-      environment {
-          registryCredential = 'docker-cred'
-           }
-      steps{
+    stage('Push Image') {
+      steps {
         script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+          docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+            dockerImage.push("last")
           }
         }
       }
     }
-    stage('Deploying container to Kubernetes') {
+    stage('Deploy to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml", 
-                                         "service.yaml")
+          withKubeConfig([credentialsId: kubeConfigCredentialsId]) {
+            sh "kubectl apply -f deployment.yaml"
+            sh "kubectl apply -f service.yaml"
+          }
         }
       }
     }
