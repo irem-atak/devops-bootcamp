@@ -3,7 +3,15 @@ pipeline {
     dockerimagename = "irematk/devops-bootcamp"
     dockerImage = ""
   }
-  agent any
+  agent {
+
+    kubernetes {
+
+      label 'my-app-deployment-89d4845dc-cdn28'
+
+    }
+
+  }
   stages {
     stage('Checkout Source') {
       steps {
