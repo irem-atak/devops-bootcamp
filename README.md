@@ -25,6 +25,6 @@ This repository contains the code and configurations for the DevOps Bootcamp tas
 - Accessed Grafana's web interface and created custom dashboards.
 https://github.com/irem-atak/devops-bootcamp/issues/1#issue-2345439854
 ## Repositories
-- [Docker Repository](https://hub.docker.com/r/irematk/devops-bootcamp): Contains Dockerfile for containerization.
+- [Docker Repository](https://hub.docker.com/r/irematk/devops-bootcamp): Contains images.
 
 
