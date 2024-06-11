@@ -1,44 +1,54 @@
 pipeline {
     agent any
+
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub')
+        KUBECONFIG_CREDENTIALS = credentials('kubeconfig-credentials-id')
+        DOCKER_IMAGE = "irematk/devops-bootcamp:bootcamp-task"
+        DOCKER_REPO = "irematk/devops-bootcamp"
     }
+
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/irem-atak/devops-bootcamp.git'
-            }
-        }
         stage('Build') {
             steps {
                 script {
-                    docker.build("irematk/devops-bootcamp:bootcamp-task${env.BUILD_ID}")
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
+
         stage('Test') {
             steps {
-                sh 'docker run --rm irematk/devops-bootcamp:bootcamp-task${env.BUILD_ID} pytest'
-            }
-        }
-        stage('Push') {
-            steps {
                 script {
-                    docker.withRegistry('', 'dockerhub') {
-                        docker.image("irematk/devops-bootcamp:bootcamp-task${env.BUILD_ID}").push()
+                    docker.image(DOCKER_IMAGE).inside {
+                        sh 'npm test'
                     }
                 }
             }
         }
+
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
+                        docker.image(DOCKER_IMAGE).push()
+                    }
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
-                    kubectl.apply('-f deployment.yaml')
-                    kubectl.apply('-f service.yaml')
+                    withKubeConfig(credentialsId: 'KUBECONFIG_CREDENTIALS') {
+                        sh 'kubectl apply -f k8s/deployment.yaml'
+                        sh 'kubectl apply -f k8s/service.yaml'
+                    }
                 }
             }
         }
     }
+
     post {
         always {
             cleanWs()
