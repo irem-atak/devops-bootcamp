@@ -4,8 +4,9 @@ pipeline {
     registryCredential = 'docker-hub'
     kubeConfigCredentialsId = 'kubernetes-cred'
   }
-  agent any
+  agent { label 'linux' }
   stages {
+    
     stage('Checkout Source') {
       steps {
         git branch: 'main',
@@ -31,7 +32,7 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          withKubeConfig([credentialsId: kubeConfigCredentialsId]) {
+          withKubeConfig([credentialsId: kubeConfigCredentialsId, serverUrl: 'https://kubernetes.default.svc.cluster.local']) {
             sh "kubectl apply -f deployment.yaml"
             sh "kubectl apply -f service.yaml"
           }
