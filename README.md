@@ -24,6 +24,8 @@ This repository contains the code and configurations for the DevOps Bootcamp tas
 - Utilized Grafana to visualize metrics collected by Prometheus.
 - Accessed Grafana's web interface and created custom dashboards.
 https://github.com/irem-atak/devops-bootcamp/issues/1#issue-2345439854
+
+![grafana dashboard](https://github.com/irem-atak/devops-bootcamp/assets/87229045/b5f8b7f6-a087-4e9c-b8a2-81c9d34f17dc)
 ## Repositories
 - [Docker Repository](https://hub.docker.com/r/irematk/devops-bootcamp): Contains images.
 
