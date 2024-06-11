@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels: 
+    app: bootcamp-my-app
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bootcamp-my-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: bootcamp-my-app
+        tier: frontend
+    spec:
+      containers:
+      - name: bootcamp-my-app-container
+        image: irematk/devops-bootcamp:bootcamp-task
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        
